@@ -1,0 +1,359 @@
+{% load i18n %}
+
+<div class="sga-block" data-state="{{ student_state }}" data-max-size="{{ max_file_size }}"
+     data-staff="{{ is_course_staff }}">
+  <script type="text/template" id="sga-tmpl">
+    <% if (display_name) { %>
+      <h2><%= display_name %></h2>
+    <% } %>
+
+    <% if (enable_upload) { %>
+      <% if (uploaded) { %>
+        <div>
+          <b>File uploaded</b>
+          <a href="<%= downloadUrl %>"><%= uploaded.filename %></a>
+          <% if (!graded) { %>
+            <i class="remove-assignment fa fa-trash-o"/>
+          <% } %>
+        </div>
+        <div class="file-upload-message">You can change or remove this file until the assignment is graded.</div>
+      <% } %>
+    <% } %>
+
+    <% if (upload_allowed) { %>
+      <label class="fileupload-label fileupload-label-button">
+          <input class="fileupload" type="file" name="assignment" required/>
+          <span>
+          <% if (uploaded) { %>
+            {% trans "Upload a different file" %}
+          <% } else { %>
+            {% trans "Upload your assignment" %}
+          <% } %>
+          </span>
+      </label>
+    <% } %>
+
+    <% if (error) { %>
+      <p class="error" tabindex="-1" aria-live="polite"><%= error %></p>
+    <% } %>
+
+    <div class="grading">
+      <% if (graded) { %>
+        <h3>Your score is <%= graded.score %> / <%= max_score %></h3>
+        <% if (graded.comment) { %>
+          <div class="grading-div">
+            <b>Instructor's comment</b> <%= graded.comment %>
+          </div>
+        <% } %>
+        <% if (annotated) { %>
+          <div class="grading-div">
+            <b>Instructor's annotated file</b>
+            <a href="<%= annotatedUrl %>"><%= annotated.filename %></a>
+          </div>
+        <% } %>
+
+        <% if (feedback_video) { %>
+          <div class="grading-div">
+            <b>Instructor's video feedback</b>
+            <h3 class="play-video-error"></h3>
+            <video id="user-feedback-video" class="video-js feedback-video" controls preload="none" width="480" height="270">
+              <p class="vjs-no-js">
+                To view this video please enable JavaScript, and consider upgrading to a web browser that
+                <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+              </p>
+            </video>
+          </div>
+        <% } %>
+      <% } else if (uploaded) { %>
+        <h3>{% trans "This assignment has not yet been graded" %}</h3>
+      <% } %>
+    </div>
+
+    <% if (all_student_submissions) { %>
+      <h3 class="student-submissions">All Participant Uploads</h3>
+      <table class="student-submissions-table">
+      <% for (var i = 0; i < all_student_submissions.length; i++) { %>
+      <%   var submission = all_student_submissions[i]; %>
+        <tr>
+          <td><div><b><%= submission.username %></b></div></td>
+          <td><div><a href="<%= studentDownloadUrl %>?student_id=<%= submission.student_id %>"><%= submission.filename %></a></div></td>
+          <td><%= submission.submission_date %></td>
+        </tr>
+      <% } %>
+      </table>
+    <% } %>
+
+  </script>
+
+  <div id="sga-content">
+  </div>
+
+  {% if is_course_staff %}
+  <script type="text/template" id="sga-grading-tmpl">
+    <table class="gridtable tablesorter" id="submissions">
+      <thead>
+      <tr>
+        <th class="header">Username <i class="icon fa fa-sort"/></th>
+        <th class="header">Name <i class="icon fa fa-sort"/></th>
+        <% if (course_is_cohorted) { %>
+          <th class="header">Cohort <i class="icon fa fa-sort"/></th>
+        <% } %>
+        <th class="header file-header">File <i class="icon fa fa-sort"/></th>
+        <th class="header uploaded-header">Uploaded <i class="icon fa fa-sort"/></th>
+        <th class="header grade-header">Grade <i class="icon fa fa-sort"/></th>
+        <th class="header instructors-comments-header">Instructor's comments <i class="icon fa fa-sort"/></th>
+        <th class="header annotated-file-header">Annotated file </th>
+        <th class="header video-header">Video <i class="icon fa fa-sort"/></th>
+        <th class="header"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% for (var i = 0; i < assignments.length; i++) { %>
+      <%     var assignment = assignments[i]; %>
+        <tr id="row-<%= assignment.module_id %>">
+          <td><%= assignment.username %></td>
+          <td><%= assignment.fullname %></td>
+          <% if (course_is_cohorted) { %>
+            <td><%= assignment.cohort_name %></td>
+          <% } %>
+          <% if (assignment.filename) { %>
+            <td data-text="1">
+                <a href="<%= downloadUrl %>?student_id=<%= assignment.student_id %>">download</a>
+            </td>
+          <% } else { %>
+            <td data-text="0"/>
+          <% } %>
+          <td data-text="<%= assignment.timestamp %>">
+            <% if (assignment.timestamp_formatted) { %>
+              <%= assignment.timestamp_formatted %>
+            <% } %>
+          </td>
+          <td>
+            <div class="grade-div">
+              <span class="score">
+              <% if (assignment.score !== null) { %>
+                <%= assignment.score %>/<%= max_score %>
+              <% } %>
+              </span>
+              <span>
+              <% if (assignment.may_grade) { %>
+                <a class="enter-grade-button button" href="#{{ id }}-enter-grade">
+                  <% if (assignment.needs_approval) { %>
+                    {% trans "Approve grade" %}
+                  <% } else { %>
+                    {% trans "Enter grade" %}
+                  <% } %>
+                </a>
+              <% } %>
+              </span>
+            </div>
+            <% if (assignment.score !== null) { %>
+              <% if (! assignment.approved) { %>
+                <div class="awaiting-approval">
+                  {% trans "Awaiting approval" %}
+                </div>
+              <% } %>
+            <% } %>
+          </td>
+          <td>
+            <% if (assignment.comment_html.length <= truncated_comment_size_limit) { %>
+              <%= assignment.comment_html %>
+            <% } else { %>
+              <a class="show-comments" href="#{{ id }}-show-comments">
+                <%= assignment.comment_html.substring(0, truncated_comment_size_limit) %>
+              </a>
+            <% } %>
+          </td>
+          <td>
+            <% if (assignment.annotated) { %>
+              <a href="<%= annotatedUrl %>?module_id=<%= assignment.module_id %>">download</a>
+            <% } else { %>
+              <label class="fileupload-label fileupload-label-button fileupload-label-button-grading">
+                  <input class="fileupload" type="file" name="annotated" required/>
+                  <span>Upload</span>
+              </label>
+            <% } %>
+          </td>
+          <% var kuluId = undefined; %>
+          <% var kuluIdSort = '0'; %>
+          <% if (assignment.feedback_video) { %>
+            <% kuluId = kuluIdSort = assignment.feedback_video.kulu_id; %>
+          <% } %>
+          <td data-text="<%= kuluIdSort %>">
+            <% if (assignment.feedback_video) { %>
+              <i class="play-video-button video-icon fa fa-play-circle-o" href="#{{ id }}-play-video"/>
+              <i class="remove-video-button video-icon fa fa-trash-o"/>
+            <% } else { %>
+              <i class="add-video-button video-icon fa fa-plus-square-o" href="#{{ id }}-add-video"/>
+            <% } %>
+            <div class="video-id">
+              <span>id:</span>
+              <input id="video-id-input" type="text" value="<%= kuluId %>"/>
+              <i class="enter-video-id-button video-icon fa fa-refresh"/>
+            </div>
+          </td>
+          <td>
+            <i class="mail-icon fa fa-envelope-o"/>
+          </td>
+        </tr>
+      <% } %>
+      </tbody>
+    </table>
+  </script>
+
+  <div aria-hidden="true" class="wrap-instructor-info">
+    <a class="instructor-info-action" id="grade-submissions-button"
+       href="#{{ id }}-grade">{% trans "Grade" %}</a>
+    <a class="instructor-info-action" id="staff-debug-info-button"
+       href="#{{ id }}-debug">{% trans "Staff Debug Info" %}</a>
+  </div>
+
+  <section aria-hidden="true" class="modal staff-modal" id="{{ id }}-grade" style="height: 75%">
+    <div class="inner-wrapper" style="color: black; overflow: auto;">
+      <div class="stats">
+        <div id="student-count"></div>
+        <span class="stat"><i class="fa fa-file-o"/><span id="file-count"/>uploads</span>
+        <span class="stat"><i class="fa fa-graduation-cap"/><span id="graded-count"/>graded (<span id="awaiting-approval-count"/> awaiting approval)</span>
+        <span class="stat"><i class="fa fa-file-video-o"/><span id="video-count"/>videos</span>
+        <span class="stat"><i class="fa fa-comment-o"/><span id="comment-count"/>comments</span>
+        <span class="stat"><i class="fa fa-file-text-o"/><span id="annotated-count"/>annotated</span>
+      </div>
+      <header>
+        <h2><span class="display_name">{{ display_name }}</span></h2>
+      </header>
+      <br>
+      <div class="search-area">
+        <label>Name:
+          <input id="input-username" type="text">
+          <i id="search-clear-search" class="fa fa-times"/>
+        </label>
+        <label id="search-cohort">Cohort:
+          <select class="cohorts"></select>
+          <i id="search-clear-cohort-search" class="fa fa-times"/>
+        </label>
+        <button id="csv-export" class="export-btn">Export Table</button>
+        <button id="assignments-export" class="export-btn">Download Assignments</button>
+      </div>
+      <div id="grade-info" style="display: block;">
+      </div>
+    </div>
+  </section>
+
+  <section aria-hidden="true" class="modal staff-modal"
+           style="height: 80%" id="{{ id }}-debug">
+    <div class="inner-wrapper" style="color: black">
+      <header><h2>{% trans "Staff Debug" %}</h2></header>
+      <br/>
+      <div class="staff_info" style="display: block; white-space: normal">
+        is_released = {{ is_released }}<br/>
+        location = {{ location }}<br/>
+        <br/>
+        <table summary="${_('Module Fields')}">
+          <tr><th>{% trans "Module Fields" %}</th></tr>
+          {% for name, field in fields %}
+          <tr>
+            <td>{{name}}</td>
+            <td>
+              <pre style="display:inline-block; margin: 0;">{{field}}</pre>
+            </td>
+          </tr>
+          {% endfor %}
+        </table><br/>
+        category = {{category}}
+      </div>
+    </div>
+  </section>
+
+  <section aria-hidden="true" class="modal grade-modal" id="{{ id }}-enter-grade">
+    <div class="inner-wrapper" style="color: black">
+      <header><h2>
+        {% trans "Enter Grade" %}
+      </h2></header>
+      <br/>
+      <div style="display: block;">
+        <form id="enter-grade-form">
+          <input id="module_id-input" type="hidden" name="module_id"/>
+          <input id="submission_id-input" type="hidden" name="submission_id"/>
+          <input id="student_id-input" type="hidden" name="student_id"/>
+          <div>Grade for <span id="student-name"/></div>
+          <div>Grade: <input id="grade-input" name="grade"/>
+            <span class="error"></span></div>
+          <div>Comment: <textarea id="comment-input" name="comment" rows="4"></textarea></div>
+          <div>
+            <button type="submit">{% trans "Submit" %}</button>
+            <button type="button" id="enter-grade-cancel">
+              {% trans "Cancel" %}
+            </button>
+            <button type="button" id="remove-grade">
+              {% trans "Remove grade" %}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section aria-hidden="true" class="modal show-comments-modal" id="{{ id }}-show-comments">
+    <div class="inner-wrapper" style="color: black">
+      <header><h2>
+        {% trans "Intructor's Comments" %}
+      </h2></header>
+      <br>
+      <div class="show-comments-body" style="display: block;">
+          <span id="show-comments-text"></span>
+      </div>
+      <button type="button" class="show-comments-cancel" id="show-comments-cancel">
+        {% trans "Cancel" %}
+      </button>
+    </div>
+  </section>
+
+  <section aria-hidden="true" class="modal add-video-modal" id="{{ id }}-add-video">
+    <div class="inner-wrapper" style="color: black">
+      <header>
+        <h2>{% trans "Add Video" %}</h2>
+      </header>
+      <button type="button" class="add-video-cancel" id="add-video-cancel">
+        {% trans "Cancel" %}
+      </button>
+      <br>
+      <div class="add-video-body" style="display: block;">
+        <!-- EasyXDM element -->
+        <div id="sga-easyxdm-content" class="sga-easyxdm-content"></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-hidden="true" class="modal play-video-modal" id="{{ id }}-play-video">
+    <div class="inner-wrapper" style="color: black">
+      <header><h2>
+        {% trans "Video Feedback for" %}
+        <span id="video-feedback-username">foobar</span>
+      </h2></header>
+      <br>
+      <div class="play-video-body" style="display: block;">
+        <h3 class="play-video-error"></h3>
+        <video id="feedback-video" class="video-js" controls preload="none" width="480" height="270">
+          <p class="vjs-no-js">
+            To view this video please enable JavaScript, and consider upgrading to a web browser that
+            <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+          </p>
+        </video>
+        <span class="feedback-video-added">
+          {% trans "added by" %}
+          <span id="video-feedback-added-by">username</span>
+          {% trans "on" %}
+          <span id="video-feedback-added-on">01/01/1970</span>
+        </span>
+      </div>
+      <button type="button" class="play-video-done" id="play-video-done">
+        {% trans "Done" %}
+      </button>
+    </div>
+  </section>
+  {% endif %}
+</div>
+
+<div id="dialog-confirm" class="dialog-confirm">
+  <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+</div>
