@@ -1,0 +1,110 @@
+{% load i18n %}
+
+<div class="profile-block" data-state="{{ student_view_data }}" data-show-staff-ui="{{ show_staff_ui }}">
+
+  <!-- rendered client side via template student-view-tmpl -->
+  <div id="student-view-content"></div>
+
+  <script type="text/template" id="student-view-tmpl">
+    <h2><%= display_name %></h2>
+    <a class="button" href="https://my.imd.org/ManageProfile" target="_blank">Edit Your Profile</a>
+    <div class="stats">
+      <span id="student-count"></span>
+    </div>
+    <div class="search-area">
+      <label>Name:
+        <input id="input-username" type="text">
+        <i id="search-clear-search" class="fa fa-times"/>
+      </label>
+      <% if (course_is_cohorted) { %>
+        <label id="search-cohort">Cohort:
+          <select class="cohorts"></select>
+          <i id="search-clear-cohort-search" class="fa fa-times"/>
+        </label>
+      <% } %>
+    </div>
+    <div id="student-profiles" class="student-profiles">
+      <% for (var i = 0; i < student_profile_list.length; i++) { %>
+      <%   var entry = student_profile_list[i]; %>
+        <div class="student-profile" id="id-<%= entry.student_id %>">
+            <div class="student-profile-clickable">
+              <img class="profile-image" src="<%= entry.image_url %>"/>
+              <div class="profile-fullname"><%= entry.fullname %></div>
+            </div>
+            <% if (profile_display.profile_display_email_button) { %>
+              <i class="mail-icon fa fa-envelope-o"/>
+            <% } %>
+        </div>
+      <% } %>
+    </div>
+  </script>
+
+  <div id="student-profile-dialog" class="student-profile-dialog">
+    <div id="student-profile-dialog-content"></div>
+  </div>
+
+  <script type="text/template" id="student-profile-dialog-tmpl">
+    <div class="profile-header">
+      <div class="profile-image">
+        <img src="<%= image_url %>"/>
+      </div>
+      <div class="profile-personalinfo">
+        <% if (profile_display.profile_display_job_title && profile.JobTitle) { %>
+          <div><%= profile.JobTitle %></div>
+        <% } %>
+        <% if (profile_display.profile_display_organisation && profile.Organisation) { %>
+          <div class="profile-div"><%= profile.Organisation %></div>
+        <% } %>
+        <% if (profile_display.profile_display_work_country && profile.WorkAddressCountry) { %>
+          <div class="profile-div"><%= profile.WorkAddressCountry %></div>
+        <% } %>
+        <% if (profile_display.profile_display_email_button) { %>
+          <div><%= email %><i class="profile-div mail-icon fa fa-envelope-o"/></div>
+        <% } %>
+      </div>
+    </div>
+    <div class="profile-main">
+      <% if (profile_display.profile_display_bio && profile.CareerBiography) { %>
+        <div class="profile-title">Career Biography</div>
+        <div class="profile-div"><%= profile.CareerBiography %></div>
+      <% } %>
+    </div>
+  </script>
+
+  {% if show_staff_ui %}
+
+  <div aria-hidden="true" class="wrap-instructor-info">
+    <a class="instructor-info-action" id="staff-debug-info-button" href="#{{ id }}-debug">{% trans "Staff Debug Info" %}</a>
+  </div>
+
+  <section aria-hidden="true" class="modal staff-modal" style="height: 80%" id="{{ id }}-debug">
+    <div class="inner-wrapper" style="color: black">
+      <header><h2>{% trans "Staff Debug" %}</h2></header>
+      <br/>
+      <div class="staff_info" style="display: block; white-space: normal">
+        is_released = {{ is_released }}<br/>
+        location = {{ location }}<br/>
+        <br/>
+        <table summary="${_('Module Fields')}">
+          <tr><th>{% trans "Module Fields" %}</th></tr>
+          {% for name, field in fields %}
+          <tr>
+            <td>{{name}}</td>
+            <td>
+              <pre style="display:inline-block; margin: 0;">{{field}}</pre>
+            </td>
+          </tr>
+          {% endfor %}
+        </table><br/>
+        category = {{category}}
+      </div>
+    </div>
+  </section>
+
+  {% endif %}
+
+</div>
+
+<div id="dialog-confirm" class="dialog-confirm">
+  <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+</div>

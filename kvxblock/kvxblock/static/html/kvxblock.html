@@ -1,0 +1,45 @@
+<div class="kvxblock_block">
+  <h2>{{ display_name }}</h2>
+
+  {% if not_in_studio %}
+  <img class="video-icon" src="{{video_icon_url}}">
+  <span id="show-videos-button" class="show-videos-button">Show Videos</span><span id="video-count" class="video-count">[0]</span>
+  <button id="record-button" class="record-button">Add Video</button>
+
+  <div id="all-videos-container" class="all-videos-container">
+    <!-- EasyXDM element -->
+    <div id="kvxblock-easyxdm-content" class="kvxblock-easyxdm-content"></div>
+
+    <div id="video-playback" class="video-playback">
+      <h3 class="play-video-error"></h3>
+      <video id="my-video" class="video-js" controls data-kulu-id="{{video_kulu_id}}" data-mp4-url="{{video_mp4_url}}" data-hls-url="{{video_hls_url}}" data-thumbnail-url="{{video_thumbnail_url}}" preload="auto" width="480" height="270">
+          <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+      </video>
+      <span class="myvideo-created">created {{video_date_created}}</span>
+    </div>
+
+    <div class="search-area">
+      <span>Username:</span>
+      <input id="input-username" type="text">
+      <button id="search-clear-search">Clear</button>
+    </div>
+    <div class="sort-area">
+      <span>Sort By:</span>
+      <span id="sort-username" class="sort-item sort-active">Username
+        <img id="username-sort-ascending-icon" class="sort-ascending-icon" src="{{ascending_sort_icon_url}}">
+        <img id="username-sort-descending-icon" class="sort-descending-icon" src="{{descending_sort_icon_url}}">
+      </span>
+      <span id="sort-date-created" class="sort-item sort-inactive">Date Created
+        <img id="date-sort-ascending-icon" class="sort-ascending-icon" src="{{ascending_sort_icon_url}}">
+        <img id="date-sort-descending-icon" class="sort-descending-icon" src="{{descending_sort_icon_url}}">
+      </span>
+    </div>
+    <div id="student-videos-container" class="student-videos-container">
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+<div id="dialog-confirm" class="dialog-confirm-delete-video" title="Delete the video?">
+  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>The video will be deleted. Are you sure?</p>
+</div>

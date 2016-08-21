@@ -1,0 +1,368 @@
+/* student view */
+
+.feedback-block #student-view-content .feedback-text {
+    margin-top: 20px;
+}
+
+.feedback-block #student-view-content .feedback-file {
+    margin-top: 20px;
+}
+
+.feedback-block #student-view-content .feedback-file-pdf {
+    margin-bottom: 10px;
+}
+
+.feedback-block #student-view-content .feedback-video-div {
+    margin-top: 20px;
+}
+
+.feedback-block .play-video-error {
+    color: red;
+}
+
+
+/* staff feedback modal */
+
+.feedback-block .staff-modal {
+    position: fixed;
+    z-index: 100;
+    display: none;
+    width: 90%;
+    height: 75%;
+    overflow: hidden;
+
+    left: 5% !important; /* important is necessary to override modal JS styling */
+    margin-left: 0px !important; /* important is necessary to override modal JS styling */
+}
+
+.feedback-block .staff-modal .inner-wrapper {
+    height: 100%;
+    overflow-y: scroll;
+    box-sizing: border-box;
+}
+
+.feedback-block .staff-modal .stats {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    font-family: verdana,arial,sans-serif;
+    font-size: 14px;
+    z-index: 10000 !important;
+}
+.feedback-block .staff-modal .stats #student-count {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+.feedback-block .staff-modal .stats .stat {
+    font-weight: bold;
+    margin-left: 10px;
+    color: rgb(150, 150, 150);
+}
+.feedback-block .staff-modal .stats .stat span {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.feedback-block .staff-modal .search-area {
+    margin-bottom: 10px;
+}
+
+.feedback-block .staff-modal .search-area i {
+    font-size: 24px;
+    cursor: pointer;
+    color: rgb(0, 120, 176);
+}
+
+.feedback-block .staff-modal .search-area input {
+    height: 30px;
+    width: 140px;
+}
+
+.feedback-block .staff-modal .search-area span:nth-child(2) {
+    margin-left: 10px;
+}
+
+.feedback-block .staff-modal .export-btn {
+    margin-left: 10px;
+}
+
+.feedback-block table.gridtable {
+    font-family: verdana,arial,sans-serif;
+    font-size:11px;
+    color:#333333;
+    border-width: 1px;
+    border-color: #666666;
+    border-collapse: collapse;
+}
+
+.feedback-block table.gridtable th {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #dedede;
+}
+
+.feedback-block table.gridtable td {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #ffffff;
+}
+
+.feedback-block .student-submissions-table div {
+    margin-right: 20px;
+}
+
+.feedback-block .remove-assignment {
+    font-size: 20px;
+    cursor: pointer;
+    color: rgb(0, 120, 176);
+}
+
+.feedback-block .file-upload-message {
+    font-size: 12px;
+    color: rgb(200, 200, 200);
+}
+
+.feedback-block .fileupload-label {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.feedback-block label.fileupload-label input[type="file"] {
+    position: fixed;
+    top: -1000px;
+}
+
+.feedback-block .fileupload-label-button {
+    border: 1px solid #AAA;
+    border-radius: 4px;
+    padding: 2px 5px;
+    cursor: pointer;
+    background-image: linear-gradient(rgb(241, 241, 241), rgb(217, 209, 209));
+    font-family: 'Open Sans', Verdana, Geneva, sans-serif, sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    text-shadow: rgb(252, 251, 251) 0px 1px 0px;
+}
+
+.feedback-block td button {
+    padding: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.feedback-block .error {
+    color: red;
+}
+
+.feedback-block .feedback-video {
+    margin-top: 5px;
+}
+
+.feedback-block a.button {
+    background-color: #E5E4E3;
+    border: 1px solid #cec5c5;
+    border-radius: 2px;
+    text-decoration: none;
+    -moz-user-select: none;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    line-height: normal;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    top: 0px;
+    left: 0px;
+    z-index: 2;
+    padding: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #333346;
+    font-weight: bold;
+    font-size: 0.8125em;
+    height: 20px;
+    cursor: pointer;
+}
+
+.feedback-block .display_name {
+    color: inherit;
+}
+
+.feedback-block table.tablesorter thead tr .header {
+ 	cursor: pointer;
+}
+.feedback-block table.tablesorter thead tr .feedback-file-header {
+    width: 80px;
+}
+.feedback-block table.tablesorter thead tr .feedback-video-header {
+    width: 150px;
+}
+
+.feedback-block table.tablesorter thead tr .tablesorter-headerDesc, table.tablesorter thead tr .tablesorter-headerAsc {
+    background-color: #8dbdd8;
+}
+
+a:focus, a:hover {
+    color: rgb(0, 120, 176);
+    background-color: transparent;
+}
+
+.feedback-block .modal .add-video-body {
+    margin: 10px;
+    margin-top: 0px;
+}
+.feedback-block .modal .play-video-done {
+    float: right;
+}
+.feedback-block .modal .add-video-cancel {
+    position: relative;
+    top: -40px;
+    z-index: 200 !important;
+}
+
+.feedback-easyxdm-content {
+    width: 500px;
+    height: 600px;
+    display: none;
+}
+
+.add-video-modal {
+    width: 540px;
+}
+
+.play-video-modal {
+    width: 502px;
+}
+
+.feedback-video-added {
+    font-size: 13px;
+}
+
+.feedback-block .staff-modal .enter-comment-icon,
+.feedback-block .staff-modal .video-icon {
+    font-size: 20px;
+    cursor: pointer;
+    color: rgb(0, 120, 176);
+}
+
+.feedback-block .staff-modal .mail-icon {
+    font-size: 16px;
+    cursor: pointer;
+    color: rgb(0, 120, 176);
+}
+
+.feedback-block .staff-modal .remove-video-button {
+    margin-left: 5px;
+}
+
+.feedback-block .staff-modal .video-id {
+    margin-top: 4px;
+}
+
+.feedback-block .staff-modal .video-id input {
+    width: 110px;
+    height: 25px;
+    margin-left: -2px;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+.feedback-block .staff-modal .video-id span {
+    vertical-align: top;
+}
+
+.feedback-block .staff-modal .video-id .enter-video-id-button {
+    margin-top: 2px;
+    margin-left: 1px;
+}
+
+.feedback-info-modal {
+    z-index: 200;
+}
+
+
+/* studio view */
+
+.modal-type-feedback .wrapper-comp-settings .list-input.settings-list .field.comp-setting-entry {
+   padding: 10px;
+}
+
+.modal-type-feedback .comp-setting-entry {
+   padding: 10px;
+   margin-right: 10px;
+   overflow: auto;
+   margin: 0;
+   font-size: 11px;
+   float: right;
+   width: 100%;
+   height: auto;
+   resize: none;
+   box-sizing: border-box;
+   border-bottom: 1px #e5e5e5;
+   box-shadow: inset 0 1px 2px 0 rgba(0,0,0,0.1);
+   font-family:'Open Sans', sans-serif;
+   color: #4c4c4c;
+   outline: 0;
+}
+
+.modal-type-feedback .setting-label {
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.modal-type-feedback .setting-input {
+    margin-left: 15px;
+    width: 30%;
+}
+
+.modal-type-feedback .setting-help {
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+.modal-type-feedback ul.editor-modes.action-list.action-modes {
+   top: 4px;
+   position: relative;
+}
+
+.modal-type-feedback ul.editor-modes.action-list.action-modes li {
+  background-color: #646464;
+  display: block;
+  padding: 5px 10px;
+  border-radius: 4px;
+  color: #FFF;
+  text-transform: uppercase;
+  font-size: 15px;
+  text-shadow: 0px 0px 2px #333;
+  width: 90px;
+  text-align: center;
+  margin-left: auto;
+  height: auto;
+}
+
+.modal-type-feedback ul.editor-modes.action-list.action-modes li a:hover {
+    background: #777;
+    color: #FFF;
+}
+
+/* error/confirm dialog */
+
+.dialog-confirm {
+    display: none;
+    z-index: 200;
+}
+.ui-dialog.dialog-confirm {
+    font-family: Verdana,Arial,sans-serif;
+    font-size: .8em;
+}
+
+.feedback-error-modal {
+    z-index: 100000;
+}

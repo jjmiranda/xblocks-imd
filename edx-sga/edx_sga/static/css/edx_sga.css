@@ -1,0 +1,401 @@
+/* CSS for StaffGradedAssignmentXBlock */
+
+.sga-block .staff-modal {
+    position: fixed;
+    z-index:100;
+    display: none;
+    width: 90%;
+    height: 75%;
+    overflow: hidden;
+
+    left: 5% !important; /* important is necessary to override modal JS styling */
+    margin-left: 0px !important; /* important is necessary to override modal JS styling */
+}
+
+.sga-block .staff-modal .inner-wrapper {
+    height: 100%;
+    overflow-y: scroll;
+    box-sizing: border-box;
+}
+
+.sga-block .staff-modal .stats {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    font-family: verdana,arial,sans-serif;
+    font-size: 14px;
+    z-index: 10000 !important;
+}
+.sga-block .staff-modal .stats #student-count {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+.sga-block .staff-modal .stats .stat {
+    font-weight: bold;
+    margin-left: 10px;
+    color: rgb(150, 150, 150);
+}
+.sga-block .staff-modal .stats .stat span:nth-of-type(1) {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.sga-block .staff-modal .search-area {
+    margin-bottom: 10px;
+}
+
+.sga-block .staff-modal .search-area i {
+    font-size: 24px;
+    cursor: pointer;
+    color: rgb(0, 120, 176);
+}
+
+.sga-block .staff-modal .search-area input {
+    height: 30px;
+    width: 140px;
+}
+
+.sga-block .staff-modal .search-area span:nth-child(2) {
+    margin-left: 10px;
+}
+
+.sga-block .staff-modal .export-btn {
+    margin-left: 10px;
+}
+
+.sga-block table.gridtable {
+    font-family: verdana,arial,sans-serif;
+    font-size:11px;
+    color:#333333;
+    border-width: 1px;
+    border-color: #666666;
+    border-collapse: collapse;
+}
+
+.sga-block table.gridtable th {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #dedede;
+}
+
+.sga-block table.gridtable td {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #ffffff;
+}
+
+.sga-block .student-submissions-table div {
+    margin-right: 20px;
+}
+
+.sga-block .remove-assignment {
+    font-size: 20px;
+    cursor: pointer;
+    color: rgb(0, 120, 176);
+}
+
+.sga-block .file-upload-message {
+    font-size: 12px;
+    color: rgb(200, 200, 200);
+}
+
+.sga-block .grading {
+    margin-top: 20px;
+}
+.sga-block .grading-div {
+    margin-top: 4px;
+}
+
+.sga-block .student-submissions {
+    margin-top: 20px;
+}
+
+.sga-block .fileupload-label {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.sga-block .fileupload-label-button {
+    border: 1px solid #AAA;
+    border-radius: 4px;
+    padding: 2px 5px;
+    cursor: pointer;
+    background-image: linear-gradient(rgb(241, 241, 241), rgb(217, 209, 209));
+    font-family: 'Open Sans', Verdana, Geneva, sans-serif, sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    text-shadow: rgb(252, 251, 251) 0px 1px 0px;
+}
+
+.sga-block .fileupload-label-button-grading {
+    font-size: 9px;
+}
+
+.sga-block label.fileupload-label input[type="file"] {
+    position: fixed;
+    top: -1000px;
+}
+
+.sga-block td button {
+    padding: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.sga-block .error {
+    color: red;
+}
+
+.sga-block .feedback-video {
+    margin-top: 5px;
+}
+
+.modal-type-edx_sga .wrapper-comp-settings .list-input.settings-list .field.comp-setting-entry {
+   padding: 10px;
+}
+
+.modal-type-edx_sga .comp-setting-entry {
+   padding: 10px;
+   margin-right: 10px;
+   overflow: auto;
+   margin: 0;
+   font-size: 11px;
+   float: right;
+   width: 100%;
+   height: auto;
+   resize: none;
+   box-sizing: border-box;
+   border-bottom: 1px #e5e5e5;
+   box-shadow: inset 0 1px 2px 0 rgba(0,0,0,0.1);
+   font-family:'Open Sans', sans-serif;
+   color: #4c4c4c;
+   outline: 0;
+}
+
+.modal-type-edx_sga .setting-label{
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.modal-type-edx_sga .setting-input{
+    margin-left: 15px;
+    width: 30%;
+}
+
+.modal-type-edx_sga .setting-help{
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+.modal-type-edx_sga ul.editor-modes.action-list.action-modes {
+   top: 4px;
+   position: relative;
+}
+
+.modal-type-edx_sga ul.editor-modes.action-list.action-modes li {
+  background-color: #646464;
+  display: block;
+  padding: 5px 10px;
+  border-radius: 4px;
+  color: #FFF;
+  text-transform: uppercase;
+  font-size: 15px;
+  text-shadow: 0px 0px 2px #333;
+  width: 90px;
+  text-align: center;
+  margin-left: auto;
+  height: auto;
+}
+
+.modal-type-edx_sga ul.editor-modes.action-list.action-modes li a:hover {
+    background: #777;
+    color: #FFF;
+}
+
+.sga-block a.button {
+    background-color: #E5E4E3;
+    border: 1px solid #cec5c5;
+    border-radius: 2px;
+    text-decoration: none;
+    -moz-user-select: none;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    line-height: normal;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    top: 0px;
+    left: 0px;
+    z-index: 2;
+    padding: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #333346;
+    font-weight: bold;
+    font-size: 0.8125em;
+    height: 20px;
+    cursor: pointer;
+}
+
+.sga-block .grade-div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sga-block .score {
+    white-space: nowrap;
+    margin-right: 10px;
+}
+
+.sga-block .awaiting-approval {
+    color: orange;
+}
+
+.sga-block .display_name {
+    color: inherit;
+}
+
+.sga-block table.tablesorter thead tr .header {
+ 	cursor: pointer;
+}
+
+.sga-block table.tablesorter thead tr .file-header {
+    width: 54px;
+}
+
+.sga-block table.tablesorter thead tr .uploaded-header {
+    width: 95px;
+}
+
+.sga-block table.tablesorter thead tr .grade-header {
+    width: 138px;
+}
+
+.sga-block table.tablesorter thead tr .annotated-file-header {
+    width: 80px;
+}
+
+.sga-block table.tablesorter thead tr .video-header {
+    width: 150px;
+}
+
+.sga-block table.tablesorter thead tr .tablesorter-headerDesc, table.tablesorter thead tr .tablesorter-headerAsc {
+    background-color: #8dbdd8;
+}
+
+.sga-block .show-comments {
+    cursor: pointer;
+    color: rgb(0, 120, 176);
+}
+
+a:focus, a:hover {
+    color: rgb(0, 120, 176);
+    background-color: transparent;
+}
+
+.sga-block .show-comments-modal {
+    width: 800px;
+}
+
+.sga-block .modal .add-video-body,
+.sga-block .modal .show-comments-body {
+    margin: 10px;
+    margin-top: 0px;
+}
+
+.sga-block .modal .show-comments-body {
+    height: 500px;
+    overflow: scroll;
+}
+
+.sga-block .modal .show-comments-cancel,
+.sga-block .modal .play-video-done {
+    float: right;
+}
+
+.sga-block .modal .add-video-cancel {
+    position: relative;
+    top: -40px;
+    z-index: 200 !important;
+}
+
+.sga-video-recorder {
+    width: 500px;
+    height: 600px;
+    display: none;
+}
+
+.add-video-modal {
+    width: 540px;
+}
+
+.play-video-modal {
+    width: 502px;
+}
+.play-video-modal .play-video-error,
+.grading .play-video-error {
+    margin-bottom: 10px;
+    color: red;
+}
+
+.feedback-video-added {
+    font-size: 13px;
+}
+
+.sga-block .staff-modal .video-icon {
+    font-size: 20px;
+    cursor: pointer;
+    color: rgb(0, 120, 176);
+}
+
+.sga-block .staff-modal .mail-icon {
+    font-size: 16px;
+    cursor: pointer;
+    color: rgb(0, 120, 176);
+}
+
+.sga-block .staff-modal .remove-video-button {
+    margin-left: 5px;
+}
+
+.sga-block .staff-modal .video-id {
+    margin-top: 4px;
+}
+
+.sga-block .staff-modal .video-id input {
+    width: 110px;
+    height: 25px;
+    margin-left: -2px;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+.sga-block .staff-modal .video-id span {
+    vertical-align: top;
+}
+
+.sga-block .staff-modal .video-id .enter-video-id-button {
+    margin-top: 2px;
+    margin-left: 1px;
+}
+
+.dialog-confirm {
+    display: none;
+    z-index: 200;
+}
+.ui-dialog.dialog-confirm {
+    font-family: Verdana,Arial,sans-serif;
+    font-size: .8em;
+}
+
+.sga-error-modal {
+    z-index: 100000;
+}

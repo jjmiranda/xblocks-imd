@@ -1,0 +1,201 @@
+.ui-widget-header {
+    border: 1px solid lightgray;
+    background: lightgray;
+}
+
+/* student view */
+
+.profile-block .stats {
+    margin-top: 10px;
+    text-size: 10px;
+}
+
+.profile-block .search-area {
+    margin-top: 10px;
+}
+
+.profile-block .search-area i {
+    font-size: 24px;
+    cursor: pointer;
+    color: rgb(0, 120, 176);
+}
+
+.profile-block .search-area input {
+    height: 30px;
+    width: 140px;
+}
+
+.profile-block .search-area #search-cohort {
+    margin-left: 5px;
+}
+
+.profile-block .profile-image {
+    width: 100px;
+    height: 100px;
+}
+
+.profile-block .student-profiles {
+    margin-top: 10px;
+    position: relative;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background: #f6f6f6 !important;
+}
+
+.profile-block .student-profile {
+    position: absolute;
+    width: 150px;
+}
+.profile-block .student-profile {
+    position: absolute;
+    width: 150px;
+    height: 164px;
+}
+.profile-block .student-profile .student-profile-clickable {
+    cursor: pointer;
+}
+.profile-block .student-profile .profile-fullname {
+    font-size: 15px;
+}
+
+.profile-block .student-profile .mail-icon {
+    font-size: 16px;
+    cursor: pointer;
+    color: rgb(0, 120, 176);
+}
+
+.student-profile-dialog {
+    display: none;
+    z-index: 10000;
+}
+.student-profile-dialog .ui-dialog-titlebar-close {
+  display: none;
+}
+.ui-dialog .student-profile-dialog {
+    font-family: Verdana,Arial,sans-serif;
+    font-size: 14px;
+}
+.ui-dialog .student-profile-dialog .mail-icon {
+    margin-left: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    color: rgb(0, 120, 176);
+}
+.ui-dialog .student-profile-dialog .profile-div {
+    margin-top: 4px;
+}
+.ui-dialog .student-profile-dialog .profile-image {
+    width: 100px;
+    float: left;
+}
+.ui-dialog .student-profile-dialog .profile-personalinfo {
+}
+.ui-dialog .student-profile-dialog .profile-main {
+    clear: left;
+}
+.ui-dialog .student-profile-dialog .profile-title {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+/* staff modal */
+
+.profile-block .staff-modal {
+    position: fixed;
+    z-index: 100;
+    display: none;
+    width: 80%;
+    height: 75%;
+    overflow: hidden;
+
+    left: 10% !important; /* important is necessary to override modal JS styling */
+    margin-left: 0px !important; /* important is necessary to override modal JS styling */
+}
+
+.profile-block .staff-modal .inner-wrapper {
+    height: 100%;
+    overflow-y: scroll;
+    box-sizing: border-box;
+}
+
+
+/* studio view */
+
+.modal-type-imdprofile .wrapper-comp-settings .list-input.settings-list .field.comp-setting-entry {
+   padding: 10px;
+}
+
+.modal-type-imdprofile .comp-setting-entry {
+   padding: 10px;
+   margin-right: 10px;
+   overflow: auto;
+   margin: 0;
+   font-size: 11px;
+   float: right;
+   width: 100%;
+   height: auto;
+   resize: none;
+   box-sizing: border-box;
+   border-bottom: 1px #e5e5e5;
+   box-shadow: inset 0 1px 2px 0 rgba(0,0,0,0.1);
+   font-family:'Open Sans', sans-serif;
+   color: #4c4c4c;
+   outline: 0;
+}
+
+.modal-type-imdprofile .setting-label {
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.modal-type-imdprofile .setting-input {
+    margin-left: 15px;
+    width: 30%;
+}
+
+.modal-type-imdprofile .setting-help {
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+.modal-type-imdprofile ul.editor-modes.action-list.action-modes {
+   top: 4px;
+   position: relative;
+}
+
+.modal-type-imdprofile ul.editor-modes.action-list.action-modes li {
+  background-color: #646464;
+  display: block;
+  padding: 5px 10px;
+  border-radius: 4px;
+  color: #FFF;
+  text-transform: uppercase;
+  font-size: 15px;
+  text-shadow: 0px 0px 2px #333;
+  width: 90px;
+  text-align: center;
+  margin-left: auto;
+  height: auto;
+}
+
+.modal-type-imdprofile ul.editor-modes.action-list.action-modes li a:hover {
+    background: #777;
+    color: #FFF;
+}
+
+
+/* error/confirm dialog */
+
+.dialog-confirm {
+    display: none;
+    z-index: 200;
+}
+.ui-dialog.dialog-confirm {
+    font-family: Verdana,Arial,sans-serif;
+    font-size: .8em;
+}
+
+.profile-error-modal {
+    z-index: 100000;
+}
