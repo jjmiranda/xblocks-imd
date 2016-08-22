@@ -1,0 +1,45 @@
+
+<div class="wrapper-comp-settings is-active" id="surveymodule-edit">
+    <ul class="list-input settings-list">
+
+      <li class="field comp-setting-entry metadata_entry is-set">
+        <div class="wrapper-comp-setting">
+          <label class="label setting-label" style="width:100%; cloor:#000000;">Module display name:
+              <input class="input setting-input" type="text" name="inputDislpayName" value="{{displayName}}"/>
+              <span id = "inputDislpayNameError" style="color: #cc0000; display: none;">This value is required!</span>
+          </label>
+        </div>
+        <span class="tip setting-help">The name which appears aa title of this module.</span>
+      </li>
+
+    <li class="field comp-setting-entry metadata_entry is-set">
+      <div class="wrapper-comp-setting">
+        <label class="label setting-label" style="width:100%; cloor:#000000;">Qualtrix survey identifier:
+            <input class="input setting-input" type="text" name="inputSurveyID" value="{{surveyId}}"/>
+            <span id = "inputSurveyIDError" style="color: #cc0000; display: none;">This value is required!</span>
+        </label>
+      </div>
+      <span class="tip setting-help">This is the identifier of the Qualtrix survey.</span>
+    </li>
+
+    <li class="field comp-setting-entry metadata_entry is-set">
+      <div class="wrapper-comp-setting">
+        <label class="label setting-label" style="width:100%; cloor:#000000;">Frame size height:
+            <input class="input setting-input" type="number" name="frameSizeHeight" value="{{frameSizeHeight}}"/>
+            <span id = "frameSizeHeightError" style="color: #cc0000; display: none;">This value is required!</span>
+        </label>
+      </div>
+      <span class="tip setting-help">This value allows to adjast the height of the frame in which the survey appears.</span>
+    </li>
+
+    <!-- <li class="field comp-setting-entry metadata_entry is-set">
+      <div class="wrapper-comp-setting">
+        <label class="label setting-label" style="width:100%; cloor:#000000;">
+          <input type="checkbox" id="impersonalise" style="width: 15px; height: 15px; margin-right: 5px;" value="anonymous">Make this survey anonymous.<br>
+          <span class="tip setting-help">This allows the survey to be anonymous and not related to certain participant.</span>
+        </label>
+      </div>
+    </li> -->
+
+  </ul>
+</div>

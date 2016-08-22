@@ -1,0 +1,133 @@
+/* CSS for SystemLoggerXBlock */
+
+.systemlogger_block p {
+    cursor: pointer;
+}
+
+.systemlogger_block .staff-modal {
+    position: fixed;
+    z-index: 100;
+    display: none;
+    width: 90%;
+    height: 75%;
+    overflow: hidden;
+
+    left: 5% !important; /* important is necessary to override modal JS styling */
+    margin-left: 0px !important; /* important is necessary to override modal JS styling */
+}
+
+.systemlogger_block table.gridtable {
+    font-family: verdana,arial,sans-serif;
+    font-size:11px;
+    color:#333333;
+    border-width: 1px;
+    border-color: #666666;
+    border-collapse: collapse;
+    width: 100%;
+    padding: 10px;
+}
+
+.systemlogger_block table.gridtable th {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #dedede;
+}
+
+.systemlogger_block table.gridtable th img{
+  width: 20px;
+  height: 20px;
+  padding: 3px;
+}
+
+.systemlogger_block table.gridtable td {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #ffffff;
+}
+
+.systemlogger_block table.tablesorter thead tr .header {
+ 	cursor: pointer;
+}
+
+.systemlogger_block .browser-data{
+  padding: 10px;
+  float: left;
+  width:100%;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.systemlogger_block .browser-data-container{
+  color: white;
+  background-color: #13689B;
+  padding: 10px;
+  display: inline-block;
+}
+
+.systemlogger_block .search-area {
+    margin-bottom: 10px;
+}
+
+.systemlogger_block .search-area i {
+    font-size: 24px;
+    cursor: pointer;
+    color: rgb(0, 120, 176);
+}
+
+.systemlogger_block .search-area input {
+    height: 30px;
+    width: 140px;
+}
+
+.systemlogger_block .search-area span:nth-child(2) {
+    margin-left: 10px;
+}
+
+.systemlogger_block .export-btn {
+    margin-left: 10px;
+    float:right;
+}
+
+.systemlogger-block-setting-input{
+    margin-left: 15px;
+    width: 50%;
+}
+
+.systemlogger-block-setting-label{
+  min-width: 300px;
+  font-weight: bold;
+}
+
+.systemlogger_block .stats {
+    padding-left: 0px;
+    margin-left: 0px;
+    font-family: verdana,arial,sans-serif;
+    font-size: 14px;
+    z-index: 10000 !important;
+}
+.systemlogger_block .stats #student-count {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+.systemlogger_block .stats .stat {
+    font-weight: bold;
+    margin-left: 10px;
+    color: rgb(150, 150, 150);
+}
+.systemlogger_block .stats .stat span:nth-of-type(1) {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.dialog-confirm {
+    display: none;
+    z-index: 200;
+}
+.ui-dialog.dialog-confirm {
+    font-family: Verdana,Arial,sans-serif;
+    font-size: .8em;
+}

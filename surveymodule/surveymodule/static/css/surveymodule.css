@@ -1,0 +1,31 @@
+/* CSS for SurveyXBlock */
+
+iframe{
+  border: none;
+  width: 100%;
+  background-image: url("/xblock/resource/surveymodule/public/images/ajax-loader.gif");
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
+}
+
+.surveymodule_block .count {
+    font-weight: bold;
+}
+
+.surveymodule_block p {
+    cursor: pointer;
+}
+
+.surveymodule_settings_row{
+  width:100%;
+}
+
+.spinner {
+    margin-left: 50%;
+    margin-top: 50%;
+    text-align:center;
+    z-index:1234;
+    overflow: auto;
+    width: 32px;
+}

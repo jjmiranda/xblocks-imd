@@ -1,0 +1,43 @@
+<div class="wrapper-comp-settings is-active" id="surveymodule-edit">
+  <ul class="list-input settings-list">
+
+      <li class="field comp-setting-entry metadata_entry is-set">
+        <div class="wrapper-comp-setting">
+          <label class="systemlogger-block-setting-label" style="width:100%; cloor:#000000;">Module display name:
+              <input class="input setting-input" type="text" name="inputDislpayName" value="{{displayName}}"/>
+              <span id = "inputDislpayNameError" style="color: #cc0000; display: none;">This value is required!</span>
+          </label>
+
+        </div>
+        <span class="tip setting-help">This name appears in the horizontal navigation at the top of the page.</span>
+      </li>
+      <li class="field comp-setting-entry metadata_entry is-set">
+        <div class="wrapper-comp-setting">
+          <!-- <div>{{DisplayUserStats}} :: {{DisplayUserStats.default}} {{displayName}}</div> -->
+          <label class="systemlogger-block-setting-label" style="width:100%; cloor:#000000;">Visibility in Student View:
+              <select class="input systemlogger-block-setting-input" name="DisplayUserStats">
+                  <option value="True" {% if DisplayUserStats %}selected{% endif %}>True</option>
+                  <option value="False" {% if not DisplayUserStats %}selected{% endif %}>False</option>
+              </select>
+              <!-- <span id = "inputDislpayNameError" style="color: #cc0000; display: none;">This value is required!</span> -->
+          </label>
+        </div>
+        <span class="tip setting-help">Indicates whether the the statistics to the certain student will appear on his/her view.</span>
+      </li>
+
+      <li class="field comp-setting-entry metadata_entry is-set">
+        <div class="wrapper-comp-setting">
+          <!-- <div>{{DisplayUserStats}} :: {{DisplayUserStats.default}} {{displayName}}</div> -->
+          <label class="label systemlogger-block-setting-label" style="width:100%; cloor:#000000;">Users to exclude by email :
+            <textarea class="systemlogger-block-setting-input" rows="10" name="EmailsListToFilter" >{{ EmailsListToFilter }}</textarea>
+              <!-- <select class="input setting-input" name="FilterIMDUsers">
+                  <option value="True" {% if FilterIMDUsers %}selected{% endif %}>True</option>
+                  <option value="False" {% if not FilterIMDUsers %}selected{% endif %}>False</option>
+              </select> -->
+              <!-- <span id = "inputDislpayNameError" style="color: #cc0000; display: none;">This value is required!</span> -->
+          </label>
+        </div>
+        <span class="tip setting-help">A list of email addresses of users that should not be shown. Wildcards are allowed, e.g. *.imd.org.</span>
+      </li>
+    <ul>
+</div>

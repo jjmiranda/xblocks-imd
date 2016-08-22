@@ -1,0 +1,99 @@
+<div class="systemlogger_block">
+<h2 style = "display:{{display_user_stats}};" >{{displayName}}</h2>
+<p>
+  <div class = "browser-data" style="display:{{display_user_stats}};">
+    <div class="browser-data-container">
+      <div style="float:left;" id = "browserDetails"></div>
+      &nbsp; &nbsp; &nbsp;
+      <div style="float:left;" id="flashDetails"></div>
+    </div>
+  </div>
+
+  <div style = "display:{{display_user_stats}};">
+    <div id = "wrongBrowser" class = "browser-data" style="display:none; background-color:yellow; ">
+      Your browser is not from the supported list. We recommend using latest versions of Chrome, Firefox or Safari, or with Internet Explorer version 11 and above.
+    </div>
+  </div>
+
+  <div style = "display:{{display_user_stats}};">
+    <div id = "wrongFlash" class = "browser-data" style="display:none; background-color:yellow; ">
+      Flash version installed on your machine is lower than the required one. You may experience issues when uploading videos.
+    </div>
+  </div>
+
+  <div aria-hidden="true" class="wrap-instructor-info" style="display:{{show_staff_button}}">
+      <a class="instructor-info-action" id="stats-button">Show Participants Statistics</a>
+  </div>
+  <br/>
+
+  <div id = "loadingContainer" class = "browser-data" style="display:none;">
+    <!-- <img src="/xblock/resource/systemlogger/public/images/ajax-loader.gif" /> -->
+    <i class="fa fa-spinner fa-spin fa-3x"></i>
+  </div>
+
+  <p>
+
+    <div id="titleStats" class="stats" style="display:none;">
+        <div id="student-count"></div>
+        <span class="stat"><i class="fa fa-user"/><span id="studentsCount"/>users</span>
+        <span class="stat"><i class="fa fa-check-circle"/><span id="compatibleBrowsers"/>compatible browsers</span>
+        <span class="stat"><i class="fa fa-exclamation-circle"/><span id="uncompatibleBrowsers"/>uncompatible browsers</span>
+        <span class="stat"><i class="fa fa-user-times"/><span id="unactiveUsers"/>unreported users</span>
+    </div>
+
+    <p>
+      <div class="search-area" style="display:none;" id="searchArea">
+        <label>Search:
+          <input id="input-username" type="text">
+          <i id="search-clear-search" class="fa fa-times"/>
+        </label>
+
+        <button id="csv-export" class="export-btn">Export in CSV</button>
+
+      </div>
+    </p>
+
+    <table class="gridtable tablesorter" id="stats-table" style="display:none;">
+      <thead>
+      <tr>
+        <th class="header">Username <i class="icon fa fa-sort"/></th>
+        <th class="header">Browser <i class="icon fa fa-sort"/></th>
+        <th class="header">System <i class="icon fa fa-sort"/></th>
+        <th class="header">Flash <i class="icon fa fa-sort"/></th>
+        <th class="header">Last Access (UTC)<i class="icon fa fa-sort"/></th>
+        <th class="header">Status<i class="icon fa fa-sort"/></th>
+      </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+  </p>
+</p>
+
+<!-- <section aria-hidden="true" class="modal staff-modal" id="displayStats">
+    <div class="inner-wrapper">
+      <header>
+        <h2>User stats</h2>
+      </header><br/>
+      <div>
+        <form>
+          <div>
+            Table goes here
+          </div>
+          <div>
+            <button type="button" id="enter-comment-cancel">
+              close
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section> -->
+
+</div>
+
+
+<div id="dialog-confirm" class="dialog-confirm">
+  <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+</div>
