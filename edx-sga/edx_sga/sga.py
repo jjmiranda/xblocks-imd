@@ -430,27 +430,19 @@ class StaffGradedAssignmentXBlock(XBlock):
         def get_student_data():
             # pylint: disable=no-member
             """
-            Returns submission/grading data for all students on the course.
-            For group assignments students may be graded without submitting anything (as
-            long as one student in the group uploads an assignment) - hence the need to
-            return all students.
+            Returns a dict of student assignment information along with
+            annotated file name, student id and module id, this
+            information will be used on grading screen
             """
-            try:
-                regexp_string = self.regexp_from_users_excluded_email(self.users_excluded_email)
-                re.compile(regexp_string)
-                users = self.students_for_course(regexp_string)
-            except:
-                log.info("regexp is invalid: '%s', getting all students instead", regexp_string)
-                users = self.students_for_course()
-
-            # JJMiranda modification...
-            users = SubmissionsStudent.objects.filter(
+            # Submissions doesn't have API for this, just use model directly.
+            students = SubmissionsStudent.objects.filter(
                 course_id=self.course_id,
                 item_id=self.block_id)
-
-            for user in users:
-                student_id = anonymous_id_for_user(user, self.course_id)
-                submission = self.get_submission(student_id)
+            for student in students:
+                submission = self.get_submission(student.student_id)
+                if not submission:
+                    continue
+                user = user_by_anonymous_id(student.student_id)
                 module, created = StudentModule.objects.get_or_create(
                     course_id=self.course_id,
                     module_state_key=self.location,
@@ -468,7 +460,7 @@ class StaffGradedAssignmentXBlock(XBlock):
                     )
 
                 state = json.loads(module.state)
-                score = self.get_score(student_id)
+                score = self.get_score(student.student_id)
                 approved = score is not None
                 if score is None:
                     score = state.get('staff_score')
@@ -476,60 +468,28 @@ class StaffGradedAssignmentXBlock(XBlock):
                 else:
                     needs_approval = False
                 instructor = self.is_instructor()
-
-                submission_id = None
-                filename = None
-                submission_date = None
-                submission_date_formatted = None
-                if submission:
-                    submission_id = submission['uuid']
-                    if 'filename' in submission['answer']:
-                        filename = submission['answer']['filename']
-                        submission_date = submission['created_at'].strftime(
-                            DateTime.DATETIME_FORMAT
-                        )
-                        submission_date_formatted = formatDateTime(submission['created_at'])
-
-                feedbackVideo = state.get("feedback_video")
-                if (feedbackVideo and 'added_on' in feedbackVideo):
-                    dateAddedObj = datetime.datetime.strptime(feedbackVideo['added_on'], DateTime.DATETIME_FORMAT)
-                    feedbackVideo['added_on'] = formatDateTime(dateAddedObj)
-
-                cohort_name = None
-                if (self.is_course_cohorted(self.course_id)):
-                    cohort_name = self.get_cohort(user, self.course_id).name
-
-                comment = state.get("comment", '')
-                comment_html = self.renderable_comment(comment)
-
                 yield {
                     'module_id': module.id,
-                    'student_id': student_id,
-                    'submission_id': submission_id,
+                    'student_id': student.student_id,
+                    'submission_id': submission['uuid'],
                     'username': module.student.username,
                     'fullname': module.student.profile.name,
-                    'filename': filename,
-                    'timestamp': submission_date,
-                    'timestamp_formatted': submission_date_formatted,
+                    'filename': submission['answer']["filename"],
+                    'timestamp': submission['created_at'].strftime(
+                        DateTime.DATETIME_FORMAT
+                    ),
                     'score': score,
                     'approved': approved,
                     'needs_approval': instructor and needs_approval,
                     'may_grade': instructor or not approved,
                     'annotated': state.get("annotated_filename"),
-                    'comment': comment,
-                    'comment_html': comment_html,
-                    'feedback_video': feedbackVideo,
-                    'cohort_name': cohort_name,
-                    'email': module.student.email,
+                    'comment': state.get("comment", ''),
                 }
 
         return {
             'assignments': list(get_student_data()),
             'max_score': self.max_score(),
-            'display_name': self.display_name,
-            "course_is_cohorted": self.is_course_cohorted(self.course_id),
-            'email_subject': self.email_subject,
-            'email_body': self.email_body,
+            'display_name': self.display_name
         }
 
     def students_for_course(self, regexp=None):
