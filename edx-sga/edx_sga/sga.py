@@ -254,8 +254,7 @@ class StaffGradedAssignmentXBlock(XBlock):
             # be first
             return submissions[0]
 
-'''
-    def get_submission(self, student_id=None):
+    '''def get_submission(self, student_id=None):
         """
         Get student's most recent submission.
         """
@@ -263,8 +262,7 @@ class StaffGradedAssignmentXBlock(XBlock):
         if submissions:
             # If I understand docs correctly, most recent submission should
             # be first
-            return submissions[0]
-'''
+            return submissions[0]'''
 
     def get_score(self, student_id=None):
         """
