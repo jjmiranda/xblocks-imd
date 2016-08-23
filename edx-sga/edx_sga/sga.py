@@ -264,11 +264,11 @@ class StaffGradedAssignmentXBlock(XBlock):
             # be first
             return submissions[0]'''
 
-    def get_score(self, student_id=None):
+    def get_score(self, submission_id=None):
         """
         Return student's current score.
         """
-        score = submissions_api.get_score(self.student_item_dict(student_id))
+        score = submissions_api.get_score(self.student_submission_id(submission_id))
         if score:
             return score['points_earned']
 
@@ -335,7 +335,7 @@ class StaffGradedAssignmentXBlock(XBlock):
 
     def renderable_comment(self, comment):
         if (len(comment) > 0):
-            return Template('{{ comment|urlize|linebreaks }}').render(Context({ "comment": comment }))
+            return Template('{{ comment|urlize|linebreaks }}').render(Context({"comment": comment}))
         else:
             return ''
 
@@ -443,6 +443,11 @@ class StaffGradedAssignmentXBlock(XBlock):
                 log.info("regexp is invalid: '%s', getting all students instead", regexp_string)
                 users = self.students_for_course()
 
+            # JJMiranda modification...
+            users = SubmissionsStudent.objects.filter(
+                course_id=self.course_id,
+                item_id=self.block_id)
+
             for user in users:
                 student_id = anonymous_id_for_user(user, self.course_id)
                 submission = self.get_submission(student_id)
@@ -495,7 +500,7 @@ class StaffGradedAssignmentXBlock(XBlock):
                     cohort_name = self.get_cohort(user, self.course_id).name
 
                 comment = state.get("comment", '')
-                comment_html= self.renderable_comment(comment)
+                comment_html = self.renderable_comment(comment)
 
                 yield {
                     'module_id': module.id,
