@@ -2,14 +2,21 @@
 
 <div id="staff-graded-assignment-edit">
   <ul class="list-input settings-list">
-    {% for field, value, validator in fields %}
+    {% for field, type, value, validator in fields %}
     <li class="field comp-setting-entry metadata_entry">
       <div class="wrapper-comp-setting">
-        <label class="label setting-label" 
-          for="{{ field.name }}_input">{{ field.display_name }}</label>
-        <input class="input setting-input" type="text" 
-               id="{{ field.name }}_input" name="{{ field.name}}" 
-               value="{{ value }}" data-validator="{{ validator }}"/>
+        <div class="label setting-label">{{ field.display_name }}
+          {% if type == "Boolean" %}
+            <select class="input setting-input" name="{{ field.name }}">
+                <option value="True" {% if value %}selected{% endif %}>True</option>
+                <option value="False" {% if not value %}selected{% endif %}>False</option>
+            </select>
+          {% elif type == "TextArea" %}
+            <textarea class="setting-input" rows="10" name="{{ field.name }}" data-validator="{{ validator }}">{{ value }}</textarea>
+          {% else %}
+            <input class="input setting-input" type="text" name="{{ field.name }}" value="{{ value }}" data-validator="{{ validator }}"/>
+          {% endif %}
+        </label>
       </div>
       <span class="tip setting-help">{{ field.help }}</span>
     </li>
