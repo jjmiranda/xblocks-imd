@@ -225,6 +225,36 @@ class StaffGradedAssignmentXBlock(XBlock):
             answer = self.dummy_submission_answer
         return submissions_api.create_submission(self.student_item_dict(student_id), answer)
 
+    def student_submission_id(self, submission_id=None):
+        # pylint: disable=no-member
+        """
+        Returns dict required by the submissions app for creating and
+        retrieving submissions for a particular student.
+        """
+        if submission_id is None:
+            submission_id = self.xmodule_runtime.anonymous_student_id
+            assert submission_id != (
+                'MOCK', "Forgot to call 'personalize' in test."
+            )
+        return {
+            "student_id": submission_id,
+            "course_id": self.course_id,
+            "item_id": self.block_id,
+            "item_type": 'sga',  # ???
+        }
+
+    def get_submission(self, submission_id=None):
+        """
+        Get student's most recent submission.
+        """
+        submissions = submissions_api.get_submissions(
+            self.student_submission_id(submission_id))
+        if submissions:
+            # If I understand docs correctly, most recent submission should
+            # be first
+            return submissions[0]
+
+'''
     def get_submission(self, student_id=None):
         """
         Get student's most recent submission.
@@ -234,6 +264,7 @@ class StaffGradedAssignmentXBlock(XBlock):
             # If I understand docs correctly, most recent submission should
             # be first
             return submissions[0]
+'''
 
     def get_score(self, student_id=None):
         """
