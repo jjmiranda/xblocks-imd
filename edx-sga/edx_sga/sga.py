@@ -207,6 +207,7 @@ class StaffGradedAssignmentXBlock(XBlock):
         Returns dict required by the submissions app for creating and
         retrieving submissions for a particular student.
         """
+        log.inf("Variables de retorno student_id: %s or %s", student_id, self.get_logged_in_student_id())
         return {
             "student_id": student_id or self.get_logged_in_student_id(),
             "course_id": self.course_id,
@@ -306,7 +307,7 @@ class StaffGradedAssignmentXBlock(XBlock):
 
     def renderable_comment(self, comment):
         if (len(comment) > 0):
-            return Template('{{ comment|urlize|linebreaks }}').render(Context({ "comment": comment }))
+            return Template('{{ comment|urlize|linebreaks }}').render(Context({"comment": comment}))
         else:
             return ''
 
@@ -1076,7 +1077,7 @@ class StaffGradedAssignmentXBlock(XBlock):
 
             while (retry <= max_retries and (mp4_url is None or hls_url is None)):
                 log.info("getting kulu valley urls: retry %d", retry)
-                sleep_for = 2 ** (retry-1) # 1, 2, 4.. seconds
+                sleep_for = 2 ** (retry-1)  # 1, 2, 4.. seconds
                 log.info("sleeping for %.1f seconds", sleep_for)
                 time.sleep(sleep_for)
                 mp4_url, hls_url = fetch_kulu_urls(kulu_id)
