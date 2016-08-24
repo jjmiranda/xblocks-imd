@@ -207,7 +207,7 @@ class StaffGradedAssignmentXBlock(XBlock):
         Returns dict required by the submissions app for creating and
         retrieving submissions for a particular student.
         """
-        log.inf("Variables de retorno student_id: %s or %s", student_id, self.get_logged_in_student_id())
+        log.info("Variables de retorno student_id: %s or %s", student_id, self.get_logged_in_student_id())
         return {
             "student_id": student_id or self.get_logged_in_student_id(),
             "course_id": self.course_id,
